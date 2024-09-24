@@ -6,11 +6,13 @@ class SimpleGameState:
         self.lineup = lineup
         self.lineupIndex = 0
         self.runners = [0] * 3
+        self.gameInProgress = True
 
     def getCurrentHitter(self):
         return self.lineup[self.lineupIndex]
 
     def updateState(self, event):
+        self.lineupIndex = (self.lineupIndex + 1) % len(self.lineup)
         match event:
             case 1 | 2 | 3  :
                 i = 2
@@ -42,4 +44,8 @@ class SimpleGameState:
                 if self.outs > 2:
                     self.inning += 1
                     self.outs = 0
+                    self.runners = [0,0,0]
+        if self.inning > 9:
+            self.gameInProgress = False
+
 

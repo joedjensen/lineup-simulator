@@ -1,4 +1,7 @@
 import pytest
+from pybaseball import batting_stats_bref
+
+from baseball.events import *
 from baseball.state import *
 
 def test_single():
@@ -74,3 +77,9 @@ def test_sequence():
     state.updateState(4)
     assert state.runners == [0,0,0]
     assert state.score == 6
+
+def test_hitter_lineup():
+    data = (batting_stats_bref(2023))
+    player = data.Hitter(data, 'Lindor')
+    state = SimpleGameState([player] * 9)
+    eventGenerator = SimpleEventGenerator()

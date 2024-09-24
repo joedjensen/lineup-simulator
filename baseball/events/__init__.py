@@ -16,4 +16,4 @@ class SimpleEventGenerator:
                  currentHitter.bb_perc,
                  currentHitter.all_other_outs_perc]
         )
-        return event
+        return event[0]
